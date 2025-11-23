@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3Ks Transient House Calendar - Two Column Layout</title>
+<link rel="stylesheet" href="Calendar.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="logo-circle" aria-hidden="true">
+    <img src="Images/Transient no bg.png" alt="3K's logo" />
+  </div>
+
+  <!-- Unit selector at top right -->
+  <div class="unit-selector">
+    <select id="unit-select" aria-label="Select Unit">
+      <option value="karl">Karl's Haven</option>
+      <option value="kyle">The Kyle Suite</option>
+    </select>
+  </div>
+
+  <div class="columns">
+    <!-- Left Column: Calendar and Bookings -->
+    <div class="left-column">
+      <!-- Navigation header -->
+      <div class="nav-header">
+        <button id="prev-month" aria-label="Previous month">&lt;</button>
+        <span id="current-month-year">March 2025</span>
+        <button id="next-month" aria-label="Next month">&gt;</button>
+      </div>
+
+      <hr class="divider-top" />
+
+      <div class="weekdays" aria-hidden="true">
+        <div>Sun</div> <div>Mon</div> <div>Tue</div> <div>Wed</div> <div>Thu</div> <div>Fri</div> <div>Sat</div>
+      </div>
+
+      <div class="days" id="daysGrid" role="grid" aria-label="Dates"></div>
+
+      <hr class="divider-bottom" />
+            <div class="legend" aria-label="Calendar Legend">
+        <div class="legend-item"><div class="legend-box booked"></div>Booked</div>
+        <div class="legend-item"><div class="legend-box available"></div>Available</div>
+      </div>
+        <!-- Action Buttons Under Calendar -->
+      <div style="margin-top: 20px; text-align: center;">
+        <button id="showFormBtn"
+                style="padding: 12px 26px; background:#2563eb; color:white; border:none;
+                border-radius:10px; font-size:17px; cursor:pointer;">
+          BOOK NOW
+        </button>
+
+        <button id="viewBookingsBtn"
+                style="margin-top:12px; padding: 12px 26px; background:#10b981; color:white; border:none;
+                border-radius:10px; font-size:17px; cursor:pointer;">
+          VIEW CURRENT BOOKINGS
+        </button>
+      </div>
+
+                 
+<!-- Modal Background -->
+<div id="modalBg"
+     style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45);
+     backdrop-filter:blur(3px); z-index:2000;"></div>
+
+<!-- Center Popup Card -->
+<div id="modalCard"
+     style="display:none; position:fixed; top:50%; left:50%;
+     transform:translate(-50%, -50%); background:white; width:420px;
+     padding:28px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.25);
+     z-index:3000;">
+
+  <!-- Close Button -->
+  <button id="closeModal"
+          style="position:absolute; top:12px; right:12px; background:#ff4d4d;
+          border:none; border-radius:50%; width:30px; height:30px; color:white;
+          font-weight:bold; cursor:pointer;">×</button>
+
+  <form class="booking-form" id="bookingForm" onsubmit="event.preventDefault(); bookRange();">
+    <h3 style="margin-top:10px; text-align:center;">Book a Date Range</h3>
+
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" id="booking-name" required />
+    </div>
+
+    <div class="form-group">
+      <label>Contact Number</label>
+      <input type="tel" id="contact-number" required />
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" required />
+    </div>
+
+    <div class="form-group">
+      <label>No. of Pax</label>
+      <input type="number" id="num-pax" min="1" required />
+    </div>
+
+    <div class="form-group">
+      <label>Start Day</label>
+      <input type="number" id="start-date" min="1" required />
+    </div>
+
+    <div class="form-group">
+      <label>End Day</label>
+      <input type="number" id="end-date" min="1" required />
+    </div>
+
+    <button type="submit" style="width:100%;">BOOK RANGE</button>
+  </form>
+</div>
+
+      <!-- Current Bookings -->
+<!-- Current Bookings -->
+<div class="bookings-list" aria-live="polite" aria-atomic="true" id="bookingsList" style="display:none;">
+  <h3>Current Bookings</h3>
+  <div id="bookings-container">No current bookings.</div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="Calendar.js"></script>
+
+
+
